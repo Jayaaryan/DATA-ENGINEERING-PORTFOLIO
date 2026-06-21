@@ -1,0 +1,169 @@
+# Employee Data Processing Pipeline using PySpark and Databricks
+
+## Project Overview
+
+This project demonstrates an ETL pipeline built using PySpark in Databricks.
+
+Employee data is extracted from an existing Spark table, transformed using PySpark DataFrame operations, analyzed using aggregations and window functions, and loaded into a cleaned target table for reporting and analytics.
+
+---
+
+## Technologies Used
+
+* PySpark
+* Databricks
+* Spark SQL
+* Window Functions
+
+---
+
+## Source Data
+
+Source Table:
+
+workspace.default.employees
+
+---
+
+## ETL Workflow
+
+### Extract
+
+Load employee data from a Spark managed table.
+
+### Transform
+
+The following transformations are applied:
+
+* Replace null salary values with 0
+* Create a bonus column
+* Filter employees with salary greater than 50,000
+* Calculate department-level salary metrics
+* Apply ranking logic using window functions
+
+### Load
+
+Store the transformed data in a new Spark table:
+
+employees_clean
+
+---
+
+## Transformations Performed
+
+### Null Handling
+
+Missing salary values are replaced with:
+
+0
+
+### Derived Column
+
+A new bonus column is created:
+
+bonus = salary + 5000
+
+### Filtering
+
+Only employees with salary greater than 50,000 are retained.
+
+### Aggregations
+
+Department-level metrics:
+
+* Total Salary
+* Average Salary
+
+### Window Functions
+
+Implemented:
+
+* ROW_NUMBER()
+* RANK()
+* DENSE_RANK()
+
+Partitioned by:
+
+department
+
+Ordered by:
+
+salary DESC
+
+---
+
+## Spark SQL Analysis
+
+Executed SQL queries on transformed data:
+
+### Average Salary by Department
+
+SELECT department,
+AVG(salary)
+FROM employees_clean
+GROUP BY department
+
+### Temporary View Creation
+
+Created a temporary view:
+
+employees_view
+
+Queried using Spark SQL for ad-hoc analysis.
+
+---
+
+## Output Tables
+
+### Cleaned Table
+
+employees_clean
+
+### Temporary View
+
+employees_view
+
+---
+
+## Skills Demonstrated
+
+* PySpark DataFrames
+* Data Transformation
+* Data Filtering
+* Null Handling
+* Aggregations
+* Window Functions
+* Spark SQL
+* Temporary Views
+* Databricks Table Management
+* ETL Pipeline Development
+
+---
+
+## Project Architecture
+
+Employee Table
+↓
+Data Cleaning
+↓
+Bonus Calculation
+↓
+Salary Filtering
+↓
+Department Aggregation
+↓
+Window Function Ranking
+↓
+employees_clean
+↓
+Spark SQL Analysis
+
+---
+
+## Key Learnings
+
+* Working with Spark DataFrames
+* Using Window Specifications
+* Creating Managed Tables in Databricks
+* Querying Data with Spark SQL
+* Building End-to-End ETL Pipelines using PySpark
