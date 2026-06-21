@@ -13,7 +13,7 @@ logging.info("ESTABLISHING CONNECTION TO MYSQL:")
 conn=mysql.connector.connect(
     host="localhost",
     user="root",
-    password="Aryan@2017"
+    password="YOUR_PASSWORD"
 )
 
 cursor=conn.cursor()
