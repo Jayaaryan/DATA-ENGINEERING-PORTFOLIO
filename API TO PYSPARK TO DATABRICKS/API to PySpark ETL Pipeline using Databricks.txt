@@ -1,0 +1,182 @@
+# API to PySpark ETL Pipeline using Databricks
+
+## Project Overview
+
+This project demonstrates an end-to-end ETL pipeline built using PySpark in Databricks.
+
+User data is extracted from a public REST API, transformed using PySpark DataFrame operations, analyzed using aggregations and Spark SQL, and loaded into a Databricks managed table.
+
+---
+
+## Technologies Used
+
+* Python
+* Requests
+* PySpark
+* Databricks
+* Spark SQL
+
+---
+
+## Data Source
+
+Public API:
+
+https://jsonplaceholder.typicode.com/users
+
+The API returns user information in JSON format, including nested address and company details.
+
+---
+
+## ETL Workflow
+
+### Extract
+
+* Fetch user data from REST API using Requests.
+* Convert JSON response into a Pandas DataFrame.
+* Create a Spark DataFrame for distributed processing.
+
+### Transform
+
+Performed the following transformations:
+
+* Flatten nested JSON fields using `json_normalize()`
+* Select required columns
+* Rename nested fields using `selectExpr()`
+* Handle missing values using `fillna()`
+* Create a derived column using `withColumn()`
+* Filter records based on business rules
+
+### Analyze
+
+* Count users by city using `groupBy()`
+* Create a temporary view for SQL-based analysis
+* Query data using Spark SQL
+
+### Load
+
+* Store transformed data in a Databricks managed table using `saveAsTable()`
+
+---
+
+## Columns Selected
+
+| Column  | Description  |
+| ------- | ------------ |
+| id      | User ID      |
+| name    | User Name    |
+| email   | User Email   |
+| website | User Website |
+| city    | User City    |
+| company | Company Name |
+
+---
+
+## Transformations Performed
+
+### Flatten Nested JSON
+
+Extracted fields from:
+
+* address.city
+* company.name
+
+### Null Handling
+
+Missing values replaced with:
+
+Unknown
+
+### Derived Column
+
+Created:
+
+name_length
+
+to calculate the length of each user's name.
+
+### Filtering
+
+Retained records where:
+
+name_length > 10
+
+---
+
+## Aggregations
+
+Calculated:
+
+* Total users per city
+
+Using:
+
+groupBy("city")
+
+---
+
+## Spark SQL
+
+Created temporary view:
+
+user_view
+
+Example query:
+
+SELECT *
+FROM user_view
+
+---
+
+## Output Table
+
+Managed Databricks Table:
+
+user_table
+
+---
+
+## Skills Demonstrated
+
+* REST API Integration
+* JSON Processing
+* Nested Data Handling
+* PySpark DataFrames
+* Data Transformation
+* Data Validation
+* Aggregations
+* Spark SQL
+* Databricks Table Management
+* ETL Pipeline Development
+
+---
+
+## Project Architecture
+
+REST API
+↓
+JSON Response
+↓
+Pandas DataFrame
+↓
+Spark DataFrame
+↓
+Data Cleaning
+↓
+Column Selection
+↓
+Aggregation
+↓
+Spark SQL
+↓
+Databricks Managed Table
+
+---
+
+## Key Learnings
+
+* Consuming APIs using Python
+* Flattening nested JSON structures
+* Transforming data with PySpark
+* Performing aggregations and SQL analysis
+* Persisting transformed data in Databricks tables
